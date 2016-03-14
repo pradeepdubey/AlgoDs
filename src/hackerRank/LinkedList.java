@@ -1,3 +1,4 @@
+package hackerRank;
 // Java program to delete a given node in linked list under given constraints
  
 class LinkedList {

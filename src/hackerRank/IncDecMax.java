@@ -1,3 +1,4 @@
+package hackerRank;
 import java.util.*;
 
 

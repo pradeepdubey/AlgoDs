@@ -346,6 +346,23 @@ class BinaryTree {
     	
     	
     }
+    public void printLevel(Node node, int n,int flag) {
+    	if (node == null)
+    		return;
+    	if(n == 1)
+    		System.out.print(node.data + "   ");
+    	else if(n> 1) {
+    		if (flag == 1) {
+    			printLevel(node.left,n-1,flag);
+    			printLevel(node.right,n-1,flag);
+    		} else {
+    			printLevel(node.right,n-1,flag);
+    			printLevel(node.left,n-1,flag);
+    		}
+    		
+    	}
+    		
+    }
     public Node createInPre(int[]in,int[]pre,int s, int e) {
     	
     	if(s > e)
@@ -359,6 +376,18 @@ class BinaryTree {
     	root.left = createInPre(in,pre,s,inIndex-1);
     	root.right = createInPre(in,pre,inIndex+1,e);
     	return root;
+    }
+    public int diameter(Node node){
+    	if(node == null)
+    		return 0;
+    	int lh = height(node.left);
+    	int rh = height(node.right);
+    	
+    	int leftD = diameter(node.left);
+    	int rightD = diameter(node.right);
+    	
+    	return Math.max(lh+rh+1,  Math.max(leftD,rightD));
+    	
     }
  public Node createInPost(int[]in,int[]post,int s, int e) {
     	
@@ -471,6 +500,30 @@ class BinaryTree {
     	
     	
     }
+    Node prev;
+    public boolean isBst2(Node node) {
+    	if(node != null) {
+    		if(!isBst2(node.left))
+    			return false;
+    		
+    		if(prev!=null && node.data < prev.data)
+    			return false;
+    		prev=node;
+    		return isBst2(node.right);
+    	}
+    	return true;
+    		
+    	
+    }
+    public boolean isBst(Node node,int min, int max) {
+    	if(node == null)
+    		return true;
+    	
+    	if(node.data < min || node.data > max)
+    		return false;
+    	return (isBst(node.left,min,node.data-1) && isBst(node.right,node.data+1,max));
+    	
+    }
     static boolean checkMirror(Node t1,Node t2) {
     	if (t1 == null && t2 == null)
     		return true;
@@ -479,6 +532,17 @@ class BinaryTree {
     		
     	
     return false;
+    }
+    public boolean isBalance(Node node) {
+    	if(node == null)
+    		return true;
+    	int lh = height(node.left);
+    	int rh = height(node.right);
+    	
+    	if ( (Math.abs(lh-rh) <=1) && isBalance(node.left) &&isBalance(node.right))
+    		return true;
+    	return false;
+    	
     }
     /* Driver program to test above functions */
     public static void main(String args[]) {
@@ -504,9 +568,22 @@ class BinaryTree {
         tree.root.right.left.right = new Node(46);
         tree.root.right.right.left = new Node(47);
         tree.root.right.right.right = new Node(48);
+        tree.root.right.right.right.right = new Node(148);
+        tree.root.right.right.right.right.right = new Node(248);
+        
        
         System.out.println("maximum path sum is : " +
                             tree.findMaxSum());
+        if( tree.isBst(tree.root, Integer.MIN_VALUE,Integer.MAX_VALUE))
+        		System.out.println("Tree is Bst");
+        else
+        	System.out.println("Tree is not Bst");
+        	
+        if( tree.isBst2(tree.root))
+    		System.out.println("Tree is Bst");
+        else
+    	System.out.println("Tree is not Bst");
+        
         System.out.println("Level Order Traversal of Tree");
         tree.levelOrder();
         System.out.println("Rev Level Order Traversal of Tree");
@@ -539,6 +616,14 @@ class BinaryTree {
     t2.levelbylevel();
     System.out.println("PostOrder is:");
     tree.postOrder(tree.root);
+    if( tree.isBst(t2.root, Integer.MIN_VALUE,Integer.MAX_VALUE))
+		System.out.println("Tree is Bst");
+    else
+    	System.out.println("Tree is not Bst");
+    if( tree.isBst2(t2.root))
+		System.out.println("Tree is Bst");
+    else
+    	System.out.println("Tree is not Bst");
     
     int[] post = {4,2,1,3,6,5,7,12,10,9,11,14,13,15,8};
     BinaryTree t3 = new BinaryTree();
@@ -564,7 +649,18 @@ class BinaryTree {
    
     tree.printLeft(tree.root.left);
     tree.printRight(tree.root.right);
-    tree.bottommiew(tree.root);
+    tree.bottommiew(tree.root);   
+    System.out.println("\nPrinting Level of the tree in SPiral are");
+    tree.printLevel(tree.root, 1,1);
+    tree.printLevel(tree.root, 2,0);
+    tree.printLevel(tree.root, 3,1);
+    tree.printLevel(tree.root, 4,0); 
+    System.out.println("\nMax Diameter is: " + tree.diameter(tree.root   ));
+    
+    if(tree.isBalance(tree.root))
+    	System.out.println("It is balanced");
+    else
+    	System.out.println("It is not  balanced");
     
    
     }

@@ -459,7 +459,13 @@ class BinaryTree {
     		printPath(node.right,arr,index +1);
     	}
     }
-    
+    public void inOrder(Node root) {
+    	if(root == null)
+    		return;
+    	inOrder(root.left);
+    	System.out.print(root.data+ "   ");
+    	inOrder(root.right);
+    }
     private void printArr(int[] arr,int size){
     	int i=0;
     	while(i <= size) {
@@ -532,6 +538,35 @@ class BinaryTree {
     		
     	
     return false;
+    }
+    void morrisInorder(Node root) {
+    	Node curr,pre;
+    	if(root == null)
+    		return;
+    	
+    	curr=root;
+    	while(curr!=null ){
+    		if(curr.left == null) {
+    			System.out.print(curr.data + "  ");
+    			curr=curr.right;
+
+    		} else {
+    			pre = curr.left;
+    			while(pre.right !=null && pre.right != curr) {
+    				pre=pre.right;
+    			}
+    			if(pre.right == null) {
+    				pre.right = curr;
+    				curr=curr.left;
+    			} else {
+
+    				pre.right=null;
+    				System.out.print(curr.data+ "  ");
+    				curr=curr.right;
+    			}
+    		}
+
+    	}
     }
     public boolean isBalance(Node node) {
     	if(node == null)
@@ -661,7 +696,11 @@ class BinaryTree {
     	System.out.println("It is balanced");
     else
     	System.out.println("It is not  balanced");
-    
+    mirror.levelbylevel();
+    System.out.println("");
+    mirror.inOrder(mirror.root);
+    System.out.println("");
+    mirror.morrisInorder(mirror.root);
    
     }
     

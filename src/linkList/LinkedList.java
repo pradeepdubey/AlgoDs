@@ -1,4 +1,16 @@
 package linkList;
+
+
+class Tnode {
+	int data;
+	Tnode left;
+	Tnode right;
+	 public Tnode(int item) {
+	        data = item;
+	        left = right = null;
+	    }
+	 
+}
 class Node {
 	 
     int data;
@@ -99,6 +111,24 @@ class LinkedList {
     	
     	return res;
     }
+    public Node reverseK(Node node, int k) {
+    	if(node == null)
+    		return null;
+    	Node prev=null;
+    	Node curr=node;
+    	Node next=null;
+    	int count=0;
+    	while(count < k && curr!=null) {
+    		next=curr.next;
+    		curr.next=prev;
+    		prev=curr;
+    		curr=next;
+    		count++;
+    	}
+    	
+    	node.next=reverseK(next,k);
+    	return prev;
+    }
     public Node addtoRem(Node l1,Node res,Node tmp) {
     	if(l1 == tmp)
     		return res;
@@ -174,7 +204,10 @@ public Node add(Node l1, Node l2){
         sum.head = sum.add(list.head,list2.head);System.out.println("");
         System.out.println("Sum Linked list : ");
         sum.printList(sum.head);
-        
+        System.out.println("Reverse  k list is ");
+        sum.head = sum.reverseK(sum.head, 3);
+        sum.printList(sum.head);
+      
         
     }
 }

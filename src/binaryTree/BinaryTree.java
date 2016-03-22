@@ -44,7 +44,7 @@ class QItem
         hd = h;
    }
 }
-class BinaryTree {
+public class BinaryTree {
  
     // Root of the Binary Tree
     Node root;
@@ -246,6 +246,37 @@ class BinaryTree {
     		
     	
     }
+
+    public int countLnodes(Node list) {
+    	int c=0;
+    	Node curr= list;
+    	while(curr!=null) { 
+    		c++;
+    		curr=curr.right;
+    	}
+    	return c;
+    }
+    private Node head;
+    public Node listToTree(int n) {
+    	if(n <=0)
+    		return null;
+    	Node left = listToTree(n/2);
+    	Node root = new Node(head.data);
+    	root.left=left;
+    	head=head.right;
+    	root.right=listToTree(n-n/2-1);
+    	return root;
+    }
+	public Node list2Tree(Node list) {
+		// TODO Auto-generated method stub
+		if(list==null)
+			return null;
+		head=list;
+		int n = countLnodes(list); 
+		Node sol = listToTree(n);
+		return sol;
+	}
+    
     void topView(Node root) {
     	if (root == null)
     		return;
@@ -600,6 +631,11 @@ class BinaryTree {
         System.out.println("\nList Converted View of Tree");
         Node list = tree.binTreetoDll(tree.root);
         printList(list);
+        
+        BinaryTree lTree = new BinaryTree();
+        lTree.root=lTree.list2Tree(list);
+        System.out.println("\nBinary Tree created out of list and its Level by Level Traversal of Tree");
+        lTree.levelbylevel();
         System.out.println("\nLevel by Level Traversal of Tree");
         
         tree.root=  tree.arraytoBinTree(arr, 0, arr.length-1);
@@ -612,7 +648,7 @@ class BinaryTree {
         int[] pre = { 8,   4,   2,   1,   3,   6,   5,   7,   12,   10,   9,   11,   14,   13, 15};
         BinaryTree t2 = new BinaryTree();
         t2.root = t2.createInPre(in,pre,0,in.length-1);
-    System.out.println("\nLevel by Level Traversal of Tree");
+    System.out.println("\nPreOrderInorder Created Level by Level Traversal of Tree");
     t2.levelbylevel();
     System.out.println("PostOrder is:");
     tree.postOrder(tree.root);
@@ -629,7 +665,7 @@ class BinaryTree {
     BinaryTree t3 = new BinaryTree();
     postIndex=post.length -1;
     t3.root = t3.createInPost(in,post,0,in.length-1);
-    System.out.println("\nLevel by Level Traversal of Tree");
+    System.out.println("\nInorder Post Order created Level by Level Traversal of Tree");
     t3.levelbylevel();
     
     BinaryTree mirror =new BinaryTree();
@@ -642,6 +678,7 @@ class BinaryTree {
     else
     	System.out.println("No Mirror tree");
     tree.levelbylevel();
+    System.out.println("Printing Paths to the leafs");
     tree.printPaths(tree.root);
     System.out.println("\nLeaves of the tree are"); 
    
@@ -664,5 +701,5 @@ class BinaryTree {
     
    
     }
-    
+
 }

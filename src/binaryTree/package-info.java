@@ -67,7 +67,7 @@ class BinaryTree {
         
         res.val = Math.max(res.val, maxTop);
         return maxSingle;
-    }
+    }  
  
     Node lca(Node root, int a,int b) {
     	if(root == null)
@@ -87,7 +87,7 @@ class BinaryTree {
  
         // Initialize result
         // int res2 = Integer.MIN_VALUE;
-        Res res = new Res();
+        Res res = new Res();     
         res.val = Integer.MIN_VALUE;
  
         // Compute and return result

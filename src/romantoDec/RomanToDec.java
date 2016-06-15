@@ -31,7 +31,7 @@ public class RomanToDec {
                                 previousnum = num;
                                 num = 1;
                                 break;
-                             case 'V':
+                                case 'V':
                                      previousnum = num;
                                 num = 5;
                                 break;

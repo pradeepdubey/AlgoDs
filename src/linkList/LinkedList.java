@@ -143,6 +143,7 @@ class LinkedList {
     	return sol;
     	
     }
+    
 public Node add(Node l1, Node l2){
     	int len1 = l1.length(l1);
     	int len2 = l2.length(l2);
@@ -163,7 +164,7 @@ public Node add(Node l1, Node l2){
     			tmp=tmp.next;
     			i--;
     		}
-    		res = addSameLen(tmp,l2);
+    		res = addSameLen(tmp,l2);   
     		res = addtoRem(l1,res,tmp);
     		
     		
@@ -180,7 +181,7 @@ public Node add(Node l1, Node l2){
     	return res;
     }
     public static void main(String[] args) {
-    	int[] arr = {1,2,3,4,5,4,6,7};
+    	int[] arr = {1,2,3,4,5,4,6,7,8,9 };
     	int[] arr2 = {5,8,3,3};
         LinkedList list = new LinkedList(arr);
         LinkedList list2 = new LinkedList(arr2);
@@ -207,7 +208,12 @@ public Node add(Node l1, Node l2){
         System.out.println("Reverse  k list is ");
         sum.head = sum.reverseK(sum.head, 3);
         sum.printList(sum.head);
-      
+     
+       sum.head = 	sum.reverseK(sum.head,3);
+       System.out.println("Sum Linked list Post K Reverse: ");
+       sum.printList(sum.head);
+        
+
         
     }
 }

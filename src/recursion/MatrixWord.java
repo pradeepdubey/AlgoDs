@@ -17,7 +17,7 @@ public class MatrixWord {
 		}// TOD
 	}
 	private static void printIntMat( int[][] mat, int k, int l) {
-		System.out.println("Pritning Visited matrix for " + k + "  " + l);
+		System.out.println("Pritning Solution matrix");
 		for (int i=0;i<M;i++) {
 			for (int j=0;j<N;j++) {
 				System.out.print(mat[i][j] + "  ");
@@ -45,7 +45,7 @@ public class MatrixWord {
 				if(mat[i][j] == string.charAt(0)) {
 					//System.out.println("Found the starting char at " + i + "  "+ j);
 					if( find(mat,string,i,j,0,visited)== 1) {
-						
+						System.out.println("Found the word at " + i + "  "+ j );
 					}
 				}
 				

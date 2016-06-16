@@ -6,15 +6,15 @@ public class RatMaze {
 	static int noOfDir = 4;
 	static int count=0;
 
-	
+	//All directions allowed
 	//static int dirX[]={-1,1,-1,-1,0,0,1,1};
 	//static int dirY[]={0,-1,1,-1,1,-1,0,1};
-	
+	//Only left, right up down directions allowed
 	static int dirX[]={-1,0,0,1};
 	static int dirY[]={0,1,-1,0};
 	
 	private static void printMat( int[][] mat, int k, int l) {
-		System.out.println("Pritning Vsited matrix for " + k + "  " + l);
+		System.out.println("Pritning matrix for " + k + "  " + l);
 		for (int i=0;i<M;i++) {
 			for (int j=0;j<N;j++) {
 				System.out.print(mat[i][j] + "  ");
@@ -38,7 +38,7 @@ public class RatMaze {
 				int jj = y + dirY[k];
 				if(isSafe(mat,ii,jj) == true)
 				{
-					printMat(visited,M,N);
+					//printMat(visited,M,N);
 					if(findpath(mat,ii,jj,visited,arr) == true)
 						return true;				
 				} else
